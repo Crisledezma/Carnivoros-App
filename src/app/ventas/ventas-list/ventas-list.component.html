@@ -1,0 +1,14 @@
+<table class="table table-dark">
+  <thead class="mx-0">
+    <tr class="text-center mx-0">
+      <th class="col-6">Fecha</th>
+      <th class="col-6">Monto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let venta of ventas" >
+      <td class="col-6"> {{ venta.fecha | date:'d/MMM/YYYY' }} </td>
+      <td class="col-6"> {{ venta.monto | currency: '¢' }} </td>
+    </tr>
+  </tbody>
+</table>

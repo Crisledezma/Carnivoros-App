@@ -1,4 +1,5 @@
 export interface Ventas {
   fecha: string,
-  monto: number
+  monto: string,
+  id?: string | number
 }

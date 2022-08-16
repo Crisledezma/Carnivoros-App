@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
@@ -12,6 +13,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
+import { VentasListComponent } from './ventas/ventas-list/ventas-list.component';
+import { VentasFormComponent } from './ventas/ventas-form/ventas-form.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     VentasComponent,
     GastosComponent,
     BalanceComponent,
-    NavbarComponent
+    NavbarComponent,
+    VentasListComponent,
+    VentasFormComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +33,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     BrowserAnimationsModule,
     MatDatepickerModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatButtonModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

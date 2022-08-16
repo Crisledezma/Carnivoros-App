@@ -1,0 +1,25 @@
+<div class="d-flex flex-column">
+  <mat-form-field appearance="fill">
+  <mat-label>Escoje una fecha</mat-label>
+    <input
+    #fecha
+    matInput
+    [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Monto</mat-label>
+    <input
+    matInput
+    #monto
+    type="number">
+  </mat-form-field>
+  <button
+  mat-raised-button
+  color="primary"
+  (click)="setVentas(fecha.value ,monto.value)">
+  Agregar
+  </button>
+</div>
