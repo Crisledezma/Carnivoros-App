@@ -16,6 +16,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { VentasListComponent } from './ventas/ventas-list/ventas-list.component';
 import { VentasFormComponent } from './ventas/ventas-form/ventas-form.component';
 import { MatButtonModule } from '@angular/material/button';
+import { GastosFormComponent } from './gastos/gastos-form/gastos-form.component';
+import { GastosListComponent } from './gastos/gastos-list/gastos-list.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { MatButtonModule } from '@angular/material/button';
     BalanceComponent,
     NavbarComponent,
     VentasListComponent,
-    VentasFormComponent
+    VentasFormComponent,
+    GastosFormComponent,
+    GastosListComponent
   ],
   imports: [
     BrowserModule,

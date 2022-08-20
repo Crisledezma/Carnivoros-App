@@ -19,10 +19,10 @@
   <button
   mat-raised-button
   color="primary"
-  (click)="addVentas({'fecha': fecha.value, 'monto': monto.value})">
+  (click)="addGastos({'fecha': fecha.value, 'monto': monto.value})">
   Agregar
   </button>
   <hr>
-  <h2 *ngIf="fecha.value" >Las ventas del día: {{ fecha.value }}</h2>
+  <h2 *ngIf="fecha.value" >Los gastos del día: {{ fecha.value }}</h2>
   <h2 *ngIf="monto.value" >Son de: {{ monto.value | currency:'¢' }}</h2>
 </div>

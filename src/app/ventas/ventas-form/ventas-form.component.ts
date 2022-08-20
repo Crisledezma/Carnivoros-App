@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { VentasServiceService } from './../../service/ventas-service.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { VentasService } from '../../service/ventas.service';
 import { Ventas } from './../../interface/ventas';
 
 @Component({
@@ -9,18 +9,22 @@ import { Ventas } from './../../interface/ventas';
 })
 export class VentasFormComponent implements OnInit {
 
-  constructor(public provider: VentasServiceService) { }
+  @ViewChild('fecha') inputFecha:any;
+  @ViewChild('monto') inputMonto:any;
 
-  ventas: Ventas[] = [];
-  venta : Ventas   = { fecha: '', monto: '' };
-
+  constructor(public provider: VentasService) { }
   
   ngOnInit(): void { }
 
-  setVentas(pFecha: string, pMonto: string) {
-    this.venta = { "fecha": pFecha, "monto": pMonto }
-    this.provider.setVentas(this.venta)
-    this.provider.getVentas();
+  addVentas(pVentas:Ventas) {
+    this.provider.addVentas(pVentas);
+    this.resetInputs();
+  }
+
+  resetInputs() {
+    console.log(this.inputFecha.nativeElement.value);
+    this.inputFecha.nativeElement.value = '';
+    this.inputMonto.nativeElement.value = '';
   }
 
 }

@@ -1,0 +1,17 @@
+<table class="table table-dark">
+  <thead class="mx-0">
+    <tr class="text-center mx-0">
+      <th class="col-6">Fecha</th>
+      <th class="col-6">Monto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let gasto of provider.gastos">
+      <td class="col-6"> {{ gasto.fecha | date:'d/MMM/YYYY' }} </td>
+      <td class="col-6"> {{ gasto.monto | currency: '¢' }} </td>
+    </tr>
+  </tbody>
+</table>
+<div class="container">
+  <h3>El total de gastos es de: {{ totales | currency }}</h3>
+</div>
