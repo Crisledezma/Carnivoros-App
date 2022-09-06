@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Gastos } from '../interface/gastos';
 
 @Injectable({
@@ -6,13 +8,12 @@ import { Gastos } from '../interface/gastos';
 })
 export class GastosService {
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  gastos: Gastos[] = [
-    { "fecha": "08/10/2022", "monto": '21250' },
-    { "fecha": "08/11/2022", "monto": '12375' },
-    { "fecha": "08/12/2022", "monto": '13280' }
-  ]
+  gastos: Gastos[] = [];
+  baseUrl: string = 'https://my-json-server.typicode.com/Crisledezma/jsonCarnivoros'
 
   getTotales():number {
     let total:number = 0;
@@ -23,8 +24,9 @@ export class GastosService {
     return total;
   }
 
-  getGastos():Gastos[] {
-    return this.gastos;
+  getGastos():Observable<Gastos[]> {
+    const url = `${this.baseUrl}/salidas`;
+    return this.http.get<Gastos[]>(url);
   }
 
   addGastos(pGastos:Gastos) {

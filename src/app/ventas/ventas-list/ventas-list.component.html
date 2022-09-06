@@ -6,7 +6,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let venta of provider.ventas">
+    <tr *ngFor="let venta of ventas">
       <td class="col-6"> {{ venta.fecha | date:'d/MMM/YYYY' }} </td>
       <td class="col-6"> {{ venta.monto | currency: '¢' }} </td>
     </tr>

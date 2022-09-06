@@ -12,17 +12,32 @@ export class VentasFormComponent implements OnInit {
   @ViewChild('fecha') inputFecha:any;
   @ViewChild('monto') inputMonto:any;
 
-  constructor(public provider: VentasService) { }
+  venta: Ventas = {
+    fecha: '',
+    monto: ''
+  }
+
+  ventas: Ventas[] = [];
+
+  constructor(
+    public provider: VentasService
+  ) { }
   
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.getVentas();
+  }
+
+  getVentas() {
+    this.provider.getVentas().subscribe(data => this.ventas = data);
+  }
 
   addVentas(pVentas:Ventas) {
-    this.provider.addVentas(pVentas);
+    this.provider.updateVentas(pVentas);
+    this.getVentas();
     this.resetInputs();
   }
 
   resetInputs() {
-    console.log(this.inputFecha.nativeElement.value);
     this.inputFecha.nativeElement.value = '';
     this.inputMonto.nativeElement.value = '';
   }

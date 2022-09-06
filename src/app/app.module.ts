@@ -18,6 +18,7 @@ import { VentasFormComponent } from './ventas/ventas-form/ventas-form.component'
 import { MatButtonModule } from '@angular/material/button';
 import { GastosFormComponent } from './gastos/gastos-form/gastos-form.component';
 import { GastosListComponent } from './gastos/gastos-list/gastos-list.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { GastosListComponent } from './gastos/gastos-list/gastos-list.component'
     MatInputModule,
     MatNativeDateModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

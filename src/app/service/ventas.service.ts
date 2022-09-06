@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Ventas } from '../interface/ventas';
 
 @Injectable({
@@ -6,28 +8,19 @@ import { Ventas } from '../interface/ventas';
 })
 export class VentasService {
 
-  constructor( ) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  ventas: Ventas[] = [
-    { "fecha": "08/10/2022", "monto": '70000' },
-    { "fecha": "08/11/2022", "monto": '75000' },
-    { "fecha": "08/12/2022", "monto": '80000' }
-  ]
+  ventas: Ventas[] = [];
+  baseUrl: string = 'https://my-json-server.typicode.com/Crisledezma/jsonCarnivoros'
   
-  getTotales():number {
-    let total:number = 0;
-    for (let i = 0; i < this.ventas.length; i++) {
-      let ventasNum = parseInt(this.ventas[i].monto);
-      total += ventasNum;
-    }
-    return total;
+  getVentas():Observable<Ventas[]> {
+    const url = `${this.baseUrl}/ventas`;
+    return this.http.get<Ventas[]>(url);
   }
 
-  getVentas():Ventas[] {
-    return this.ventas;
-  }
-
-  addVentas(pVentas:Ventas) {
+  updateVentas(pVentas:Ventas) {
     this.ventas.push(pVentas);
   }
 
