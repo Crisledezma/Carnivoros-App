@@ -1,14 +1,14 @@
 <div [ngStyle]="{'max-width': '500px'}"  class="d-flex flex-column container">
   <form #ventasForm="ngForm" (ngSubmit)="addVentas({'fecha': fecha.value, 'monto': monto.value})" >
     <mat-form-field appearance="fill">
-    <mat-label>Escoje una fecha</mat-label>
+      <mat-label>Escoje una fecha</mat-label>
       <input
       #fecha
       name="fecha"
       matInput
       [matDatepicker]="picker"
       [(ngModel)]="venta.fecha">
-      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-hint>DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>

@@ -32,8 +32,8 @@ export class VentasFormComponent implements OnInit {
   }
 
   addVentas(pVentas:Ventas) {
-    this.provider.updateVentas(pVentas);
-    this.getVentas();
+    this.provider.updateVentas(pVentas)
+    this.provider.ventas.push(pVentas);
     this.resetInputs();
   }
 

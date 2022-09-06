@@ -20,8 +20,10 @@ export class VentasService {
     return this.http.get<Ventas[]>(url);
   }
 
-  updateVentas(pVentas:Ventas) {
+  updateVentas(pVentas:Ventas): Observable<Ventas> {
+    const url = `${this.baseUrl}/ventas`
     this.ventas.push(pVentas);
+    return this.http.post<Ventas>(url, pVentas);
   }
 
 }

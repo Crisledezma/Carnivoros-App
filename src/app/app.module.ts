@@ -12,7 +12,7 @@ import { BalanceComponent } from './balance/balance.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { VentasListComponent } from './ventas/ventas-list/ventas-list.component';
 import { VentasFormComponent } from './ventas/ventas-form/ventas-form.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,7 +43,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'es' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
