@@ -12,12 +12,8 @@ export class VentasFormComponent implements OnInit {
   @ViewChild('fecha') inputFecha:any;
   @ViewChild('monto') inputMonto:any;
 
-  venta: Ventas = {
-    fecha: '',
-    monto: ''
-  }
-
   ventas: Ventas[] = [];
+  venta: Ventas = { fecha: '', monto: '' };
 
   constructor(
     public provider: VentasService
@@ -34,6 +30,7 @@ export class VentasFormComponent implements OnInit {
   addVentas(pVentas:Ventas) {
     this.provider.updateVentas(pVentas)
     this.provider.ventas.push(pVentas);
+    this.ventas.push(pVentas);
     this.resetInputs();
   }
 

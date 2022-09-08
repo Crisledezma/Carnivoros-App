@@ -18,15 +18,20 @@ export class GastosFormComponent implements OnInit {
   gasto: Gastos = { fecha: '', monto: '' };
 
   ngOnInit(): void {
+    this.getGastos();
+  }
+
+  getGastos() {
+    this.provider.getGastos().subscribe(data => this.gastos = data);
   }
 
   addGastos(pGastos:Gastos) {
     this.provider.addGastos(pGastos);
+    this.gastos.push(pGastos);
     this.resetInputs();
   }
 
   resetInputs() {
-    console.log(this.inputFecha.nativeElement.value);
     this.inputFecha.nativeElement.value = '';
     this.inputMonto.nativeElement.value = '';
   }

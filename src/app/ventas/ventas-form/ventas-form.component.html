@@ -1,5 +1,5 @@
 <div [ngStyle]="{'max-width': '500px'}"  class="d-flex flex-column container">
-  <form #ventasForm="ngForm" (ngSubmit)="addVentas({'fecha': fecha.value, 'monto': monto.value})" >
+  <form #ventasForm="ngForm" (ngSubmit)="addVentas({'fecha': fecha.value, 'monto': monto.value})">
     <mat-form-field appearance="fill">
       <mat-label>Escoje una fecha</mat-label>
       <input
@@ -30,7 +30,6 @@
         </button> 
       </div>
     </div>
-      
   </form>
   <hr>
   <h2 *ngIf="fecha.value" >Las ventas del día: {{ fecha.value }}</h2>

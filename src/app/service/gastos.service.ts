@@ -15,22 +15,16 @@ export class GastosService {
   gastos: Gastos[] = [];
   baseUrl: string = 'https://my-json-server.typicode.com/Crisledezma/jsonCarnivoros'
 
-  getTotales():number {
-    let total:number = 0;
-    for (let i = 0; i < this.gastos.length; i++) {
-      let gastosNum = parseInt(this.gastos[i].monto);
-      total += gastosNum;
-    }
-    return total;
-  }
 
   getGastos():Observable<Gastos[]> {
     const url = `${this.baseUrl}/salidas`;
     return this.http.get<Gastos[]>(url);
   }
 
-  addGastos(pGastos:Gastos) {
+  addGastos(pGastos: Gastos): Observable<Gastos> {
+    const url = `${this.baseUrl}/gastos`;
     this.gastos.push(pGastos);
+    return this.http.post<Gastos>(url, pGastos);
   }
 
 }
