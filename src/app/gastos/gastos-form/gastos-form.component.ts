@@ -10,31 +10,17 @@ import { GastosService } from 'src/app/service/gastos.service';
 export class GastosFormComponent implements OnInit {
 
   @ViewChild('fecha') inputFecha:any;
-  @ViewChild('monto') inputMonto:any;
+  @ViewChild('monto') inputMonto: any;
+  
+  gasto: Gastos = { fecha: '', monto: '' };
 
   constructor(public provider: GastosService) { }
 
-  gastos: Gastos[] = [];
-  gasto: Gastos = { fecha: '', monto: '' };
-
-  ngOnInit(): void {
-    this.getGastos();
-  }
-
-  getGastos() {
-    this.provider.getGastos().subscribe(data => this.gastos = data);
-  }
-
-  addGastos(pGastos:Gastos) {
-    this.provider.addGastos(pGastos);
-    this.gastos.push(pGastos);
-    this.resetInputs();
-  }
+  ngOnInit(): void { }
 
   resetInputs() {
     this.inputFecha.nativeElement.value = '';
     this.inputMonto.nativeElement.value = '';
   }
-
 
 }

@@ -6,12 +6,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let gasto of gastos">
-      <td class="col-6"> {{ gasto.fecha | date:'d/MMM/YYYY' }} </td>
+    <tr *ngFor="let gasto of provider.gastos">
+      <td class="col-6"> {{ gasto.fecha }} </td>
       <td class="col-6"> {{ gasto.monto | currency: '¢' }} </td>
     </tr>
   </tbody>
 </table>
 <div class="container">
-  <h3>El total de gastos es de: {{ totales | currency }}</h3>
+  <h3>El total de gastos es de: {{ provider.calcularTotales() | currency }}</h3>
 </div>

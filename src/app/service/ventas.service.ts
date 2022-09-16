@@ -12,18 +12,30 @@ export class VentasService {
     private http: HttpClient
   ) { }
 
-  ventas: Ventas[] = [];
+  ventas: any = [];
+  totales: number = 0;
   baseUrl: string = 'https://my-json-server.typicode.com/Crisledezma/jsonCarnivoros'
   
-  getVentas():Observable<Ventas[]> {
+  getVentas(): any {
     const url = `${this.baseUrl}/ventas`;
-    return this.http.get<Ventas[]>(url);
+    return this.http.get(url).subscribe(datos => this.ventas = datos);
   }
 
-  updateVentas(pVentas:Ventas): Observable<Ventas> {
-    const url = `${this.baseUrl}/ventas`
-    this.ventas.push(pVentas);
-    return this.http.post<Ventas>(url, pVentas);
+  updateVentas(fecha: string, monto: number): Observable<Ventas> {
+    const venta = {"fecha": fecha,"monto":monto};
+    const url = `${this.baseUrl}/ventas`;
+    this.ventas.push(venta);
+    return this.http.post<Ventas>(url, venta);
+  }
+
+  calcularTotales(): number {
+    let total:number = 0;
+    for (let i = 0; i < this.ventas.length; i++) {
+      let ventasNum = parseInt(this.ventas[i].monto);
+      total += ventasNum;
+    }
+    this.totales = total;
+    return this.totales;
   }
 
 }

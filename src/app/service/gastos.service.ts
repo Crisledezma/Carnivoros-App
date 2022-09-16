@@ -12,19 +12,30 @@ export class GastosService {
     private http: HttpClient
   ) { }
 
-  gastos: Gastos[] = [];
+  gastos: any = [];
+  totales: number = 0;
   baseUrl: string = 'https://my-json-server.typicode.com/Crisledezma/jsonCarnivoros'
 
-
-  getGastos():Observable<Gastos[]> {
+  getGastos(): any {
     const url = `${this.baseUrl}/salidas`;
-    return this.http.get<Gastos[]>(url);
+    return this.http.get(url).subscribe(datos => {this.gastos = datos;});
   }
 
-  addGastos(pGastos: Gastos): Observable<Gastos> {
+  addGastos(fecha: string, monto: number): Observable<Gastos> {
+    const gasto = {"fecha": fecha,"monto":monto};
     const url = `${this.baseUrl}/gastos`;
-    this.gastos.push(pGastos);
-    return this.http.post<Gastos>(url, pGastos);
+    this.gastos.push(gasto);
+    return this.http.post<Gastos>(url, gasto);
+  }
+
+  calcularTotales(): number {
+    let total:number = 0;
+    for (let i = 0; i < this.gastos.length; i++) {
+      let gastosNum = parseInt(this.gastos[i].monto);
+      total += gastosNum;
+    }
+    this.totales = total;
+    return this.totales;
   }
 
 }

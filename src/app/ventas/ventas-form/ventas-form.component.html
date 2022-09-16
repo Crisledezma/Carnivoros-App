@@ -1,9 +1,11 @@
-<div [ngStyle]="{'max-width': '500px'}"  class="d-flex flex-column container">
-  <form #ventasForm="ngForm" (ngSubmit)="addVentas({'fecha': fecha.value, 'monto': monto.value})">
+<div [ngStyle]="{'max-width': '500px'}" class="d-flex flex-column container">
+  <form #ventasForm="ngForm"
+  (ngSubmit)="provider.updateVentas(fecha.value, monto.value); ventasForm.resetForm()">
     <mat-form-field appearance="fill">
       <mat-label>Escoje una fecha</mat-label>
       <input
-      #fecha
+      required
+      #fecha="ngModel"
       name="fecha"
       matInput
       [matDatepicker]="picker"
@@ -12,18 +14,23 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+    <p [hidden]="!fecha.touched || fecha.valid"
+    class="alert alert-danger">La fecha es obligatoria</p>
     <mat-form-field appearance="fill">
       <mat-label>Monto</mat-label>
       <input
+      required
       matInput
-      #monto
+      #monto="ngModel"
       name="monto"
       type="number"
       [(ngModel)]="venta.monto">
     </mat-form-field>
+    <p [hidden]="!monto.touched || monto.valid"
+    class="alert alert-danger">El monto es obligatorio</p>
     <div class="row">
       <div class="col">
-        <button
+        <button type="submit" [disabled]="!ventasForm.valid"
         mat-raised-button
         color="primary">
         Agregar
@@ -32,6 +39,6 @@
     </div>
   </form>
   <hr>
-  <h2 *ngIf="fecha.value" >Las ventas del día: {{ fecha.value }}</h2>
-  <h2 *ngIf="monto.value" >Son de: {{ monto.value | currency:'¢' }}</h2>
+  <h2 *ngIf="fecha.value" >Las ventas del día {{ fecha.value | date }}</h2>
+  <h2 *ngIf="monto.value" >Son de {{ monto.value | currency:'¢' }}</h2>
 </div>
