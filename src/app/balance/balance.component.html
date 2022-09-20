@@ -1,1 +1,17 @@
-<p>balance works!</p>
+<h2>Balance de Entradas y Salidas</h2>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Entradas</th>
+      <th scope="col">Salidas</th>
+      <th scope="col">Ganancia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>{{ entradas | currency: '¢' }}</th>
+      <td>{{ salidas | currency: '¢' }}</td>
+      <td>{{ entradas - salidas | currency: '¢' }}</td>
+    </tr>
+  </tbody>
+</table>

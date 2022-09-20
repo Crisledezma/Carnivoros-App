@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GastosService } from '../service/gastos.service';
+import { VentasService } from '../service/ventas.service';
 
 @Component({
   selector: 'app-balance',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BalanceComponent implements OnInit {
 
-  constructor() { }
+  entradas: number = this.ventas.totales;
+  salidas : number = this.gastos.totales;
 
-  ngOnInit(): void {
-  }
+  constructor(
+    public ventas: VentasService,
+    public gastos: GastosService
+  ) { }
+
+  ngOnInit() { }
 
 }
