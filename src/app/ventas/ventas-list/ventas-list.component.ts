@@ -12,4 +12,16 @@ export class VentasListComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  getVentas() {
+    setTimeout(() => {
+      this.provider.getVentas();
+    },500)
+  }
+
+  delVentas(venta: string) {
+    if(confirm("Seguro que desea borrar este registro?")){
+      this.provider.delVentas(venta);
+    }
+  }
+
 }

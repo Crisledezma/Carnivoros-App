@@ -13,4 +13,16 @@ export class GastosListComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  getGastos() {
+    setTimeout(() => {
+      this.provider.getGastos();
+    },500)
+  }
+
+  delGastos(gasto: string) {
+    if (confirm(`Seguro que desea borrar este registro?`)) {
+      this.provider.delGastos(gasto);
+    }
+  }
+
 }

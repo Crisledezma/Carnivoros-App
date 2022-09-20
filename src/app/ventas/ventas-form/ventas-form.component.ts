@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VentasService } from '../../service/ventas.service';
 import { Ventas } from './../../interface/ventas';
 
@@ -14,5 +14,11 @@ export class VentasFormComponent implements OnInit {
   constructor(public provider: VentasService) { }
   
   ngOnInit(): void { }
+
+  getVentas() {
+    setTimeout(() => {
+      this.provider.getVentas();
+    },500)
+  }
 
 }

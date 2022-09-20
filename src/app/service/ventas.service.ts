@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Ventas } from '../interface/ventas';
 
 @Injectable({
@@ -14,18 +14,19 @@ export class VentasService {
 
   ventas: any = [];
   totales: number = 0;
-  baseUrl: string = 'https://my-json-server.typicode.com/Crisledezma/jsonCarnivoros'
+  baseUrl: string = 'http://localhost:3000';
+  // baseUrl: string = 'https://crudcrud.com/api/0071013619dc4a988bda06ba35e310ea';
+  // baseUrl: string = 'https://my-json-server.typicode.com/Crisledezma/jsonCarnivoros'
   
-  getVentas(): any {
+  getVentas(): Subscription {
     const url = `${this.baseUrl}/ventas`;
     return this.http.get(url).subscribe(datos => this.ventas = datos);
   }
 
-  updateVentas(fecha: string, monto: number): Observable<Ventas> {
+  updateVentas(fecha: string, monto: number): Subscription {
     const venta = {"fecha": fecha,"monto":monto};
     const url = `${this.baseUrl}/ventas`;
-    this.ventas.push(venta);
-    return this.http.post<Ventas>(url, venta);
+    return this.http.post<Ventas>(url, venta).subscribe();
   }
 
   calcularTotales(): number {
@@ -36,6 +37,15 @@ export class VentasService {
     }
     this.totales = total;
     return this.totales;
+  }
+
+  editVentas(venta: Ventas) {
+    console.log(venta);
+    return this.http.put(`${this.baseUrl}/ventas/${venta.id}`,venta)
+  }
+
+  delVentas(id:string): Subscription {
+    return this.http.delete(`${this.baseUrl}/ventas/${id}`).subscribe();
   }
 
 }

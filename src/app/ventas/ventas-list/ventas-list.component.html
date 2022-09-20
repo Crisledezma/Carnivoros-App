@@ -1,14 +1,23 @@
 <table class="table table-dark">
   <thead class="mx-0">
     <tr class="text-center mx-0">
-      <th class="col-6">Fecha</th>
-      <th class="col-6">Monto</th>
+      <th class="col-4">Fecha</th>
+      <th class="col-3">Monto</th>
+      <th class="col-5">Acciones</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let venta of provider.ventas">
-      <td class="col-6"> {{ venta.fecha | date }} </td>
-      <td class="col-6"> {{ venta.monto | currency: '¢' }} </td>
+      <td class="col-4"> {{ venta.fecha | date }} </td>
+      <td class="col-3"> {{ venta.monto | currency: '¢' }} </td>
+      <td class="col-5 text-center">
+        <!-- <span><button (click)="provider.editVentas(venta); getVentas()"
+          class="btn btn-warning"><i class="bi bi-pencil-square"></i>
+        </button></span> -->
+        <span><button (click)="delVentas(venta.id); getVentas()"
+          class="btn btn-danger"><i class="bi bi-trash"></i>
+        </button></span>
+      </td>
     </tr>
   </tbody>
 </table>
