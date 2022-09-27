@@ -9,10 +9,14 @@ import { GastosService } from 'src/app/service/gastos.service';
 })
 export class GastosFormComponent implements OnInit {
   
+  constructor(public provider: GastosService) { }
+  
   gasto: Gastos = { fecha: '', monto: '' };
 
-  constructor(public provider: GastosService) { }
-
   ngOnInit(): void { }
+
+  addGastos(gasto: Gastos) {
+    this.provider.addGastos(gasto).subscribe();
+  }
 
 }

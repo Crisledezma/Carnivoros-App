@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Ventas } from '../interface/ventas';
 
 @Injectable({
@@ -8,44 +9,35 @@ import { Ventas } from '../interface/ventas';
 })
 export class VentasService {
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  private _refresh$ = new Subject<void>();
+  public totales: number = 0;
+  public baseUrl: string = environment.baseUrlLocalHost3000;
+  // public baseUrl: string = environment.baseUrlCrudCrud
+  // public baseUrl: string = environment.baseUrlMyJsonServer
 
-  ventas: any = [];
-  totales: number = 0;
-  baseUrl: string = 'http://localhost:3000';
-  // baseUrl: string = 'https://crudcrud.com/api/0071013619dc4a988bda06ba35e310ea';
-  // baseUrl: string = 'https://my-json-server.typicode.com/Crisledezma/jsonCarnivoros'
+  constructor(private http: HttpClient) { }
+
+  get refresh$() {
+    return this._refresh$
+  }
   
-  getVentas(): Subscription {
+  getVentas(): Observable<Ventas[]> {
     const url = `${this.baseUrl}/ventas`;
-    return this.http.get(url).subscribe(datos => this.ventas = datos);
+    return this.http.get<Ventas[]>(url);
   }
 
-  updateVentas(fecha: string, monto: number): Subscription {
-    const venta = {"fecha": fecha,"monto":monto};
+  addVentas(venta: Ventas): Observable<Ventas> {
     const url = `${this.baseUrl}/ventas`;
-    return this.http.post<Ventas>(url, venta).subscribe();
+    return this.http.post<Ventas>(url, venta)
+    .pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    )
   }
 
-  calcularTotales(): number {
-    let total:number = 0;
-    for (let i = 0; i < this.ventas.length; i++) {
-      let ventasNum = parseInt(this.ventas[i].monto);
-      total += ventasNum;
-    }
-    this.totales = total;
-    return this.totales;
-  }
-
-  editVentas(venta: Ventas) {
-    console.log(venta);
-    return this.http.put(`${this.baseUrl}/ventas/${venta.id}`,venta)
-  }
-
-  delVentas(id:string): Subscription {
-    return this.http.delete(`${this.baseUrl}/ventas/${id}`).subscribe();
+  delVentas(id:string): Observable<Ventas> {
+    return this.http.delete<Ventas>(`${this.baseUrl}/ventas/${id}`);
   }
 
 }

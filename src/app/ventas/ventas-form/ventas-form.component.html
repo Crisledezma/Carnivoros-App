@@ -1,6 +1,6 @@
 <div [ngStyle]="{'max-width': '500px'}" class="d-flex flex-column container">
   <form #ventasForm="ngForm"
-  (ngSubmit)="provider.updateVentas(fecha.value, monto.value); getVentas(); ventasForm.resetForm()">
+  (ngSubmit)="addVentas(venta); ventasForm.resetForm()">
     <mat-form-field appearance="fill">
       <mat-label>Escoje una fecha</mat-label>
       <input

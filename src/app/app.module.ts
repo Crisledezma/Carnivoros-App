@@ -19,6 +19,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { GastosFormComponent } from './gastos/gastos-form/gastos-form.component';
 import { GastosListComponent } from './gastos/gastos-list/gastos-list.component';
 import { FormsModule } from '@angular/forms';
+import { VentasService } from './service/ventas.service';
+import { GastosService } from './service/gastos.service';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { FormsModule } from '@angular/forms';
     VentasListComponent,
     VentasFormComponent,
     GastosFormComponent,
-    GastosListComponent
+    GastosListComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,11 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'es' }],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es' },
+    GastosService,
+    VentasService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

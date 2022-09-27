@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseUrlLocalHost3000: 'http://localhost:3000',
+  baseUrlCrudCrud: 'https://crudcrud.com/api/0071013619dc4a988bda06ba35e310ea',
+  baseUrlMyJsonServer: 'https://my-json-server.typicode.com/Crisledezma/jsonCarnivoros'
 };
 
 /*

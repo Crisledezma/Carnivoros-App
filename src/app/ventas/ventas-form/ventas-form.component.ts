@@ -5,20 +5,18 @@ import { Ventas } from './../../interface/ventas';
 @Component({
   selector   : 'app-ventas-form',
   templateUrl: './ventas-form.component.html',
-  styleUrls  : ['./ventas-form.component.css']
+  styleUrls: ['./ventas-form.component.css'],
 })
 export class VentasFormComponent implements OnInit {
   
-  venta: Ventas = { fecha: '', monto: '' };
-
   constructor(public provider: VentasService) { }
   
+  venta: Ventas = { fecha: '', monto: '' };
+
   ngOnInit(): void { }
 
-  getVentas() {
-    setTimeout(() => {
-      this.provider.getVentas();
-    },500)
+  addVentas(venta: Ventas) {
+    this.provider.addVentas(venta).subscribe();
   }
 
 }

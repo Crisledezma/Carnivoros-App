@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Gastos } from '../interface/gastos';
 
 @Injectable({
@@ -8,43 +9,35 @@ import { Gastos } from '../interface/gastos';
 })
 export class GastosService {
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  private _refresh$ = new Subject<void>();
+  public totales: number = 0;
+  public baseUrl: string = environment.baseUrlLocalHost3000;
+  // public baseUrl: string = environment.baseUrlCrudCrud
+  // public baseUrl: string = environment.baseUrlMyJsonServer
 
-  gastos: any = [];
-  totales: number = 0;
-  baseUrl: string = 'http://localhost:3000'
-  // baseUrl: string = 'https://crudcrud.com/api/0071013619dc4a988bda06ba35e310ea'
-  // baseUrl: string = 'https://my-json-server.typicode.com/Crisledezma/jsonCarnivoros'
+  constructor(private http: HttpClient) { }
 
-  getGastos(): Subscription {
+  get refresh$() {
+    return this._refresh$;
+  }
+
+  getGastos(): Observable<Gastos[]> {
     const url = `${this.baseUrl}/gastos`;
-    return this.http.get(url).subscribe(datos => {this.gastos = datos;});
+    return this.http.get<Gastos[]>(url);
   }
 
-  addGastos(fecha: string, monto: number): Subscription {
-    const gasto = {"fecha": fecha,"monto":monto};
+  addGastos(gasto: Gastos): Observable<Gastos> {
     const url = `${this.baseUrl}/gastos`;
-    return this.http.post<Gastos>(url, gasto).subscribe();
+    return this.http.post<Gastos>(url, gasto)
+      .pipe(
+        tap(() => {
+          this._refresh$.next();
+      })
+    )
   }
 
-  calcularTotales(): number {
-    let total:number = 0;
-    for (let i = 0; i < this.gastos.length; i++) {
-      let gastosNum = parseInt(this.gastos[i].monto);
-      total += gastosNum;
-    }
-    this.totales = total;
-    return this.totales;
-  }
-
-  editGastos(id:string) {
-    
-  }
-
-  delGastos(id:string): Subscription {
-    return this.http.delete(`${this.baseUrl}/gastos/${id}`).subscribe();
+  delGastos(id:string): Observable<Gastos> {
+    return this.http.delete<Gastos>(`${this.baseUrl}/gastos/${id}`);
   }
 
 }

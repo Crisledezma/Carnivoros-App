@@ -7,13 +7,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let venta of provider.ventas">
+    <tr *ngFor="let venta of ventas">
       <td class="col-4"> {{ venta.fecha | date }} </td>
       <td class="col-3"> {{ venta.monto | currency: '¢' }} </td>
       <td class="col-5 text-center">
-        <!-- <span><button (click)="provider.editVentas(venta); getVentas()"
-          class="btn btn-warning"><i class="bi bi-pencil-square"></i>
-        </button></span> -->
         <span><button (click)="delVentas(venta.id); getVentas()"
           class="btn btn-danger"><i class="bi bi-trash"></i>
         </button></span>
@@ -22,5 +19,5 @@
   </tbody>
 </table>
 <div class="container">
-  <h3>El total de ventas es de {{ provider.calcularTotales() | currency: '¢' }}</h3>
+  <h3>El total de ventas es de {{ calcularTotales() | currency: '¢' }}</h3>
 </div>

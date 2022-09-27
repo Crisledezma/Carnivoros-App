@@ -1,4 +1,4 @@
-<h2>Balance de Entradas y Salidas</h2>
+<h2 class="text-center">Balance de Entradas y Salidas</h2>
 <table class="table table-dark">
   <thead>
     <tr>
@@ -9,9 +9,9 @@
   </thead>
   <tbody>
     <tr>
-      <th>{{ entradas | currency: '¢' }}</th>
-      <td>{{ salidas | currency: '¢' }}</td>
-      <td>{{ entradas - salidas | currency: '¢' }}</td>
+       <th>{{ calcularVentas() | currency: '¢' }}</th>
+       <td>{{ calcularGastos() | currency: '¢' }}</td>
+      <td>{{ calcularVentas() - calcularGastos() | currency: '¢' }}</td>
     </tr>
   </tbody>
 </table>
