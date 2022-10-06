@@ -11,9 +11,7 @@ export class GastosService {
 
   private _refresh$ = new Subject<void>();
   public totales: number = 0;
-  public baseUrl: string = environment.baseUrlLocalHost3000;
-  // public baseUrl: string = environment.baseUrlCrudCrud
-  // public baseUrl: string = environment.baseUrlMyJsonServer
+  public baseUrl: string = environment.baseUrlSupaBase;
 
   constructor(private http: HttpClient) { }
 
@@ -22,22 +20,32 @@ export class GastosService {
   }
 
   getGastos(): Observable<Gastos[]> {
-    const url = `${this.baseUrl}/gastos`;
-    return this.http.get<Gastos[]>(url);
+    const url = `${this.baseUrl}gastos`;
+    return this.http.get<Gastos[]>(url, {
+      headers: {
+        apikey: environment.supaBaseApiKey,
+        Authorization: environment.supaBaseAuth
+      }
+    });
   }
 
   addGastos(gasto: Gastos): Observable<Gastos> {
-    const url = `${this.baseUrl}/gastos`;
-    return this.http.post<Gastos>(url, gasto)
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-      })
-    )
+    const url = `${this.baseUrl}gastos`;
+    return this.http.post<Gastos>(url, gasto, {
+      headers: {
+        apikey: environment.supaBaseApiKey,
+        Authorization: environment.supaBaseAuth
+      }
+    }).pipe(tap(() => {this._refresh$.next();}))
   }
 
   delGastos(id:string): Observable<Gastos> {
-    return this.http.delete<Gastos>(`${this.baseUrl}/gastos/${id}`);
+    return this.http.delete<Gastos>(`${this.baseUrl}gastos?id=eq.${id}`,{
+      headers: {
+        apikey: environment.supaBaseApiKey,
+        Authorization: environment.supaBaseAuth
+      }
+    }).pipe(tap(() => { this._refresh$.next(); }));
   }
 
 }

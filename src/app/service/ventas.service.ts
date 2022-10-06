@@ -11,9 +11,7 @@ export class VentasService {
 
   private _refresh$ = new Subject<void>();
   public totales: number = 0;
-  public baseUrl: string = environment.baseUrlLocalHost3000;
-  // public baseUrl: string = environment.baseUrlCrudCrud
-  // public baseUrl: string = environment.baseUrlMyJsonServer
+  public baseUrl: string = environment.baseUrlSupaBase;
 
   constructor(private http: HttpClient) { }
 
@@ -22,22 +20,32 @@ export class VentasService {
   }
   
   getVentas(): Observable<Ventas[]> {
-    const url = `${this.baseUrl}/ventas`;
-    return this.http.get<Ventas[]>(url);
+    const url = `${this.baseUrl}ventas`;
+    return this.http.get<Ventas[]>(url, {
+      headers: {
+        apikey: environment.supaBaseApiKey,
+        Authorization: environment.supaBaseAuth
+      }
+    });
   }
 
   addVentas(venta: Ventas): Observable<Ventas> {
-    const url = `${this.baseUrl}/ventas`;
-    return this.http.post<Ventas>(url, venta)
-    .pipe(
-      tap(() => {
-        this._refresh$.next();
-      })
-    )
+    const url = `${this.baseUrl}ventas`;
+    return this.http.post<Ventas>(url, venta, {
+      headers: {
+        apikey: environment.supaBaseApiKey,
+        Authorization: environment.supaBaseAuth
+      }
+    }).pipe(tap(() => {this._refresh$.next();}))
   }
 
   delVentas(id:string): Observable<Ventas> {
-    return this.http.delete<Ventas>(`${this.baseUrl}/ventas/${id}`);
+    return this.http.delete<Ventas>(`${this.baseUrl}ventas?id=eq.${id}`,{
+      headers: {
+        apikey: environment.supaBaseApiKey,
+        Authorization: environment.supaBaseAuth
+      }
+    }).pipe(tap(() => { this._refresh$.next(); }));
   }
 
 }

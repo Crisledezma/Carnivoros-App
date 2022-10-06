@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  baseUrlLocalHost3000: 'http://localhost:3000',
-  baseUrlCrudCrud: 'https://crudcrud.com/api/0071013619dc4a988bda06ba35e310ea',
-  baseUrlMyJsonServer: 'https://my-json-server.typicode.com/Crisledezma/jsonCarnivoros'
+  baseUrlSupaBase: 'https://abxvxsfcdgwzmzpqkeus.supabase.co/rest/v1/',
+  supaBaseApiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFieHZ4c2ZjZGd3em16cHFrZXVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjQ2MzIyODcsImV4cCI6MTk4MDIwODI4N30.KWXKJUEvkcrG0Q4_Zd_s-Z_qxQSgplQGPe-GJmQJzsU',
+  supaBaseAuth: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFieHZ4c2ZjZGd3em16cHFrZXVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjQ2MzIyODcsImV4cCI6MTk4MDIwODI4N30.KWXKJUEvkcrG0Q4_Zd_s-Z_qxQSgplQGPe-GJmQJzsU'
 };
 
 /*
